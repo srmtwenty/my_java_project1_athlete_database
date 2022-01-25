@@ -34,7 +34,7 @@ public class PartyService {
 	public Party createParty(Party p) {
 		return partyRepository.save(p);
 	}
-	public Party updateParty(Long id, String partyName, String description, double score,String ranking, Routine routine, Nation nation, List<Swimmer> swimmers, List<Music> musics, Competition competition, User host, String coach) {
+	public Party updateParty(Long id, String partyName, String description, double score,String ranking, Routine routine, Nation nation, List<Swimmer> swimmers, List<Music> musics, Competition competition, User host, List<Swimmer> coaches) {
 		Party p=findParty(id);
 		p.setPartyName(partyName);
 		p.setDescription(description);
@@ -46,7 +46,7 @@ public class PartyService {
 		p.setMusics(musics);
 		p.setCompetition(competition);
 		p.setHost(host);
-		p.setCoach(coach);
+		p.setCoaches(coaches);
 		return partyRepository.save(p);
 	}
 	public Party updateParty(Party p) {

@@ -77,7 +77,12 @@ public class Party {
 	@OneToMany(mappedBy="party", fetch=FetchType.LAZY)
 	private List<Comment> comments;
 	
-	private String coach;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="coaches_parties",
+		joinColumns=@JoinColumn(name="party_id"),
+		inverseJoinColumns=@JoinColumn(name="swimmer_id")
+			)
+	private List<Swimmer> coaches;
 	
 	public Party() {
 	}
@@ -174,14 +179,14 @@ public class Party {
 		this.host = host;
 	}
 	
-	public String getCoach() {
-		return coach;
+	public List<Swimmer> getCoaches() {
+		return coaches;
 	}
 
-	public void setCoach(String coach) {
-		this.coach = coach;
+	public void setCoaches(List<Swimmer> coaches) {
+		this.coaches = coaches;
 	}
-	
+
 	public List<Comment> getComments() {
 		return comments;
 	}

@@ -16,7 +16,23 @@
 	<p>Nation:<c:out value="${party.nation.name}"/></p>
 	<p>Description:<c:out value="${party.description}"/></p>
 	<p>Host:<c:out value="${party.host.username}"/></p>
-	<p>Coach:<c:out value="${party.coach}"/></p>
+	<p>Coach:</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Coach</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${coaches}" var="coach">
+			<tr>
+				<td><a href="/competitions/swimmers/${coach.id}"><c:out value="${coach.name}"/></a></td>
+				<td></td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 	<p>Swimmers:</p>
 	<table>
 		<thead>
@@ -89,6 +105,18 @@
 			<a href="/competitions/parties/${party.id}/edit">Edit Party</a>
 		</c:otherwise>
 	</c:choose>
+	
+	<p>Add Coach</p>
+	<form action="/competitions/parties/${party.id}/addCoach" method="POST">
+		<select name="coach">
+			<c:forEach items="${swimmers}" var="coach">
+				<option value="${coach.id}">
+					<c:out value="${coach.name}"/>
+				</option>
+			</c:forEach>
+		</select>
+		<input type="submit" value="Add Coach">
+	</form>
 	
 	<ul>
 		<c:forEach items="${comments}" var="comment">

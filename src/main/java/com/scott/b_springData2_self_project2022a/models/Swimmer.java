@@ -75,6 +75,13 @@ public class Swimmer {
 			)
 	private List<Party> parties;
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="coaches_parties",
+		joinColumns=@JoinColumn(name="swimmer_id"),
+		inverseJoinColumns=@JoinColumn(name="party_id")
+			)
+	private List<Party> cParties;
+	
 	@OneToMany(mappedBy="swimmer", fetch=FetchType.LAZY)
 	private List<Comment> comments;
 	
@@ -236,6 +243,16 @@ public class Swimmer {
 			return "/swimmerphotos/"+id+"/"+photos;
 		}
 	}
+	
+	public List<Party> getcParties() {
+		return cParties;
+	}
+
+
+	public void setcParties(List<Party> cParties) {
+		this.cParties = cParties;
+	}
+
 
 	@PrePersist
 	protected void onCreate() {

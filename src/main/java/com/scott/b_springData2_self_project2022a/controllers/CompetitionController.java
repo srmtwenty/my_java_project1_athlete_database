@@ -438,6 +438,9 @@ public class CompetitionController {
 		model.addAttribute("routines", routines);
 		List<Competition> competitions=competitionService.allCompetitions();
 		model.addAttribute("competitions", competitions);
+		
+		//List<Swimmer> swimmers=swimmerService.allSwimmers();
+		//model.addAttribute("swimmers", swimmers);
 		return "newParty.jsp";
 	}
 	@RequestMapping(value="/competitions/parties/new", method=RequestMethod.POST)
@@ -482,6 +485,9 @@ public class CompetitionController {
 		List<Comment> comments=p.getComments();
 		model.addAttribute("comments", comments);
 		
+		List<Swimmer> coaches=p.getCoaches();
+		model.addAttribute("coaches", coaches);
+		
 		Competition c=p.getCompetition();
 		model.addAttribute("competition", c);
 		return "showParty.jsp";
@@ -491,7 +497,7 @@ public class CompetitionController {
 	public String editParty(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
-			return "redirect:";
+			return "redirect:/logout";
 		}
 		User u=userService.findUser(loggedId);
 		model.addAttribute("loggedUser", u);
@@ -508,15 +514,20 @@ public class CompetitionController {
 		return "editParty.jsp";
 	}
 	@RequestMapping(value="/competitions/parties/{id}/edit", method=RequestMethod.PUT)
-	public String updateParty(@PathVariable("id") Long id, @Valid @ModelAttribute("party") Party party, BindingResult result, HttpSession session) {
+	public String updateParty(@PathVariable("id") Long id, @Valid @ModelAttribute("party") Party party, BindingResult result, HttpSession session, Model model) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
 			return "redirect:";
 		}
+		//User u=userService.findUser(loggedId);
+		//model.addAttribute("loggedUser", u);
 		
 		if(result.hasErrors()) {
 			return "editParty.jsp";
 		}else {
+			User host=userService.findUser(loggedId);
+			party.setHost(host);
+			
 			partyService.updateParty(party);
 			return "redirect:/competitions/parties/"+id;
 		}
@@ -537,7 +548,7 @@ public class CompetitionController {
 	public String addSwimmer(@PathVariable("id") Long id, @RequestParam("swimmer") Long swimmerId, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
-			return "redirect:";
+			return "redirect:/logout";
 		}
 		
 		Party p=partyService.findParty(id);
@@ -549,6 +560,22 @@ public class CompetitionController {
 		partyService.updateParty(p);
 		return "redirect:/competitions/parties/"+id;
 	}
+	@RequestMapping("/competitions/parties/{id}/addCoach")
+	public String addCoach(@PathVariable("id") Long id, @RequestParam("coach") Long coachId, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		Party p=partyService.findParty(id);
+		Swimmer c=swimmerService.findSwimmer(coachId);
+		
+		List<Swimmer> coaches=p.getCoaches();
+		coaches.add(c);
+		p.setCoaches(coaches);
+		partyService.updateParty(p);
+		return "redirect:/competitions/parties/"+id;
+	}
+	
 	@RequestMapping("/competitions/parties/{id}/removeSwimmer")
 	public String removeSwimmer(@PathVariable("id") Long id, @RequestParam("party") Long partyId, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
@@ -626,6 +653,7 @@ public class CompetitionController {
 		musicService.updateMusic(m);
 		return "redirect:/competitions/musics/"+id;
 	}
+	
 	@RequestMapping(value="/competitions/musics/{id}/removeParty", method=RequestMethod.POST)
 	public String removeParty(@PathVariable("id") Long id, @RequestParam("party") Long partyId, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
@@ -710,12 +738,12 @@ public class CompetitionController {
 		return "redirect:/competitions/musics";
 	}
 	
-	@RequestMapping(value="/competitions/parties/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/competitions/parties/{id}/delete", method=RequestMethod.DELETE)
 	public String deleteParty(@PathVariable("id") Long id, HttpSession session) {
-		Long loggedId=(Long) session.getAttribute("loggedId");
-		if(loggedId==null) {
-			return "redirect:";
-		}
+		//Long loggedId=(Long) session.getAttribute("loggedId");
+		//if(loggedId==null) {
+		//	return "redirect:";
+		//}
 		
 		partyService.deleteParty(id);
 		return "redirect:/competitions/parties/"+id;

@@ -22,11 +22,7 @@
 			<form:textarea path="description"/>
 		</p>
 		
-		<p>
-			<form:label path="coach">Coach:</form:label>
-			<form:errors path="coach"/>
-			<form:input path="coach"/>
-		</p>
+		
 		<p>
 			<form:label path="nation">Nation:</form:label>
 			<form:errors path="nation"/>
