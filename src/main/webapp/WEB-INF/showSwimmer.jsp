@@ -18,21 +18,11 @@
 	<p>Photo:<c:out value="${swimmer.picPath}"/></p>
 	<img src='<c:out value="{swimmer.picPath}"/>'/>
 	
-	<c:choose>
-		<c:when test="${loggedUser==swimmer.host}">
-			<a href="/competitions/swimmers/${swimmer.id}/edit">Edit Swimmer</a>
-			<a href="/competitions/swimmers/${swimmer.id}/delete">Delete</a>
-		</c:when>
-		<c:otherwise>
-			<p>Only host can edit or delete info</p>
-		</c:otherwise>
-	</c:choose>
-	
 	<p>Comments:</p>
 	<ul>
-	<c:forEach items="${comments}" var="comment">	
-		<li>Commented By:<c:out value="${comment.host.username}"/> <c:out value="${comment.content}"/> <c:out value="${comment.createdAt}"/></li>
-	</c:forEach>
+		<c:forEach items="${comments}" var="comment">	
+			<li>Commented By:<c:out value="${comment.host.username}"/> <c:out value="${comment.content}"/> <c:out value="${comment.createdAt}"/></li>
+		</c:forEach>
 	</ul>
 	
 	<form action="/competitions/swimmers/${swimmer.id}/addComment" method="POST">
@@ -43,6 +33,16 @@
 		</p>
 		<input type="submit" value="Post Comment">
 	</form>
+	
+	<c:choose>
+		<c:when test="${loggedUser==swimmer.host}">
+			<a href="/competitions/swimmers/${swimmer.id}/edit">Edit Swimmer</a>
+			<a href="/competitions/swimmers/${swimmer.id}/delete">Delete</a>
+		</c:when>
+		<c:otherwise>
+			<p>Only a host can edit or delete info</p>
+		</c:otherwise>
+	</c:choose>
 	
 	<%@ include file="footer.jsp" %>
 </html>

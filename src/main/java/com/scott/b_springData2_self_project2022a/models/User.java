@@ -53,6 +53,12 @@ public class User {
 	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
 	private List<Comment> Comments;
 	
+	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
+	private List<Album> albums;
+	
+	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
+	private List<Composer> Composers;
+	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
@@ -157,6 +163,22 @@ public class User {
 
 	public void setComments(List<Comment> comments) {
 		Comments = comments;
+	}
+	
+	public List<Album> getAlbums() {
+		return albums;
+	}
+
+	public void setAlbums(List<Album> albums) {
+		this.albums = albums;
+	}
+
+	public List<Composer> getComposers() {
+		return Composers;
+	}
+
+	public void setComposers(List<Composer> composers) {
+		Composers = composers;
 	}
 
 	@PrePersist

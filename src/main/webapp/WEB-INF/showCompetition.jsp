@@ -49,14 +49,6 @@
 		</p>
 		<input type="submit" value="Add Party">
 	</form> --%>
-	<c:choose> 
-		<c:when test="${loggedUser==null}">
-			<p>Login to edit party.</p>
-		</c:when>
-		<c:otherwise>
-			<a href="/competitions/${competition.id}/edit">Edit Competition</a>
-		</c:otherwise>
-	</c:choose>
 	
 	<ul>
 		<c:forEach items="${cComments}" var="cComment">
@@ -70,5 +62,15 @@
 		</p>
 		<input type="submit" value="Add Comment">
 	</form>
+	
+	<c:choose> 
+		<c:when test="${loggedUser==competitions.host}">
+			<a href="/competitions/${competition.id}/edit">Edit Competition</a>
+		</c:when>
+		<c:otherwise>
+			<p>Only a host can edit party.</p>
+		</c:otherwise>
+	</c:choose>
+	
 	<%@ include file="footer.jsp" %>
 </html>

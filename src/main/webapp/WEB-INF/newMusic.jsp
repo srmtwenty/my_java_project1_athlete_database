@@ -19,12 +19,24 @@
 		<p>
 			<form:label path="album">Album:</form:label>
 			<form:errors path="album"/>
-			<form:input path="album"/>
+			<form:select name="album" path="album">
+				<c:forEach items="${albums}" var="album">
+					<form:option value="${album.id}">
+						<c:out value="${album.title}"/>
+					</form:option>
+				</c:forEach>
+			</form:select>
 		</p>
 		<p>
 			<form:label path="composer">Composer:</form:label>
 			<form:errors path="composer"/>
-			<form:input path="composer"/>
+			<form:select name="composer" path="composer">
+				<c:forEach items="${composers}" var="composer">
+					<form:option value="${composer.id}">
+						<c:out value="${composer.name}"/>
+					</form:option>
+				</c:forEach>
+			</form:select>
 		</p>
 		<p>
 			<form:label path="performer">Performer:</form:label>

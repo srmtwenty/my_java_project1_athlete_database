@@ -9,29 +9,25 @@
 <head>
 <meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="js/app.js"></script>
+	
 </head>
-
+	<h2>All Albums</h2>
 	<table>
 		<thead>
 			<tr>
-				<th>Parties</th>
+				<th>Album</th>
 				<th>Host</th>
 				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${parties}" var="party">
+			<c:forEach items="${albums}" var="album">
 			<tr>
-				<td><a href="/competitions/parties/${party.id}"><c:out value="${party.partyName}"/></a></td>
-				<td><c:out value="${party.host.username}"/></td>
+				<td><a href="/competitions/albums/${album.id}"><c:out value="${album.title}"/></a></td>
+				<td><c:out value="${album.host.username}"/></td>
 				<td>
-					<form action="/competitions/parties/${party.id}" method="POST">
-						<input type="hidden" name="_method" value="delete">
-						<input type="submit" value="Delete">
-					</form>
-					<a href="/competitions/parties/${party.id}"></a>
+					<a href="/competitions/albums/${album.id}/edit">Edit</a>
+					<a href="/competitions/albums/${album.id}/delete">Delete</a>
 				</td>
 			</tr>
 			</c:forEach>

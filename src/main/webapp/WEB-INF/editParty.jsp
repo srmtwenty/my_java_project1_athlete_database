@@ -24,17 +24,6 @@
 		</p>
 		
 		<p>
-			<form:label path="coach">Coach:</form:label>
-			<form:errors path="coach"/>
-			<form:select name="coach" path="coach">
-				<c:forEach items="${swimmers}" var="swimmer">
-					<form:option value="${swimmer.id}">
-						<c:out value="${swimmer.name}"/>
-					</form:option>
-				</c:forEach>
-			</form:select>
-		</p>
-		<p>
 			<form:label path="nation">Nation:</form:label>
 			<form:errors path="nation"/>
 			<form:select name="nation" path="nation">

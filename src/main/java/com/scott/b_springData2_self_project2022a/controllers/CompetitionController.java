@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.scott.b_springData2_self_project2022a.models.Album;
 import com.scott.b_springData2_self_project2022a.models.Comment;
 import com.scott.b_springData2_self_project2022a.models.Competition;
+import com.scott.b_springData2_self_project2022a.models.Composer;
 import com.scott.b_springData2_self_project2022a.models.Music;
 import com.scott.b_springData2_self_project2022a.models.Nation;
 import com.scott.b_springData2_self_project2022a.models.Party;
 import com.scott.b_springData2_self_project2022a.models.Routine;
 import com.scott.b_springData2_self_project2022a.models.Swimmer;
 import com.scott.b_springData2_self_project2022a.models.User;
+import com.scott.b_springData2_self_project2022a.services.AlbumService;
 import com.scott.b_springData2_self_project2022a.services.CommentService;
 import com.scott.b_springData2_self_project2022a.services.CompetitionService;
+import com.scott.b_springData2_self_project2022a.services.ComposerService;
 import com.scott.b_springData2_self_project2022a.services.MusicService;
 import com.scott.b_springData2_self_project2022a.services.NationService;
 import com.scott.b_springData2_self_project2022a.services.PartyService;
@@ -52,6 +56,11 @@ public class CompetitionController {
 	private PartyService partyService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private AlbumService albumService;
+	@Autowired
+	private ComposerService composerService;
+	
 	
 	private int number=0;
 	public int getNumber() {
@@ -145,13 +154,16 @@ public class CompetitionController {
 		return "showCompetition.jsp";
 	}
 	@RequestMapping("/competitions/{id}/edit")
-	public String editCompetition(@PathVariable("id") Long id, @ModelAttribute("competition") Competition competition, Model model, HttpSession session) {
+	public String editCompetition(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
 			return "redirect:";
 		}
 		User u=userService.findUser(loggedId);
 		model.addAttribute("loggedUser", u);
+		
+		Competition competition=competitionService.findCompetition(loggedId);
+		model.addAttribute("competition", competition);
 		return "editCompetition.jsp";
 	}
 	@RequestMapping(value="/competitions/{id}/edit", method=RequestMethod.PUT)
@@ -163,6 +175,8 @@ public class CompetitionController {
 		if(result.hasErrors()) {
 			return "/editCompetition.jsp";
 		}else {
+			User host=userService.findUser(loggedId);
+			competition.setHost(host);
 			competitionService.updateCompetition(competition);
 			return "redirect:/competition/"+id;
 		}
@@ -236,6 +250,7 @@ public class CompetitionController {
 		
 		List<Nation> nations=nationService.allNations();
 		model.addAttribute("nations", nations);
+		
 		return "newSwimmer.jsp";
 	}
 	
@@ -311,6 +326,8 @@ public class CompetitionController {
 		if(result.hasErrors()) {
 			return "editSwimmer.jsp";
 		}else {
+			User host=userService.findUser(loggedId);
+			swimmer.setHost(host);
 			swimmerService.updateSwimmer(swimmer);
 			return "redirect:/competitions/swimmers/"+swimmer.getId();
 		}
@@ -681,6 +698,11 @@ public class CompetitionController {
 		Music music=musicService.findMusic(id);
 		model.addAttribute("music", music);
 		
+		List<Album> albums=albumService.allAlbums();
+		model.addAttribute("albums", albums);
+		List<Composer> composers=composerService.allComposers();
+		model.addAttribute("composers", composers);
+		
 		return "editMusic.jsp";
 	}
 	@RequestMapping(value="/competitions/musics/{id}/edit", method=RequestMethod.PUT)
@@ -689,6 +711,8 @@ public class CompetitionController {
 		if(loggedId==null) {
 			return "redirect:";
 		}
+		User host=userService.findUser(loggedId);
+		music.setHost(host);
 		musicService.updateMusic(music);
 		return "redirect:/competitions/musics/"+music.getId();
 	}
@@ -701,6 +725,12 @@ public class CompetitionController {
 		}
 		User u=userService.findUser(loggedId);
 		model.addAttribute("loggedUser", u);
+		
+		List<Album> albums=albumService.allAlbums();
+		model.addAttribute("albums", albums);
+		
+		List<Composer> composers=composerService.allComposers();
+		model.addAttribute("composers", composers);
 		return "newMusic.jsp";
 	}
 	@RequestMapping(value="/competitions/musics/new", method=RequestMethod.POST)

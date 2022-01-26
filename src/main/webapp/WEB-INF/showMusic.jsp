@@ -12,8 +12,8 @@
 
 	<h1><c:out value="${music.title}"/></h1>
 	
-	<p>Album:<c:out value="${music.album}"/></p>
-	<p>Composer:<c:out value="${music.composer}"/></p>
+	<p>Album:<a href="/competitions/albums/${album.id}"><c:out value="${music.album.title}"/></a></p>
+	<p>Composer:<a href="/competitions/composers/${composer.id}"><c:out value="${music.composer.name}"/></a></p>
 	<p>Performer:<c:out value="${music.performer}"/></p>
 	<p>Description:<c:out value="${music.description}"/></p>
 	<p>Host:<c:out value="${music.host.username}"/></p>
@@ -54,14 +54,6 @@
 		</select>
 		<input type="submit" value="Remove Party">
 	</form>
-	<c:choose>
-		<c:when test="${loggedUser==null}">
-			<p>Login to edit party.</p>
-		</c:when>
-		<c:otherwise>
-			<a href="/competitions/musics/${music.id}/edit">Edit Competition</a>
-		</c:otherwise>
-	</c:choose>
 	
 	<ul>
 		<c:forEach items="${competitions}" var="comp">
@@ -76,5 +68,15 @@
 		</p>
 		<input type="submit" value="Add comment">
 	</form>
+	
+	<c:choose>
+		<c:when test="${loggedUser==music.host}">
+			<a href="/competitions/musics/${music.id}/edit">Edit Competition</a>
+		</c:when>
+		<c:otherwise>
+			<p>Only a host can edit party.</p>
+		</c:otherwise>
+	</c:choose>
+	
 	<%@ include file="footer.jsp" %>
 </html>

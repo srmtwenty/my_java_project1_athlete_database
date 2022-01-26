@@ -8,7 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/app.js"></script>
 </head>
 
 	<h1>Swimmers List</h1>

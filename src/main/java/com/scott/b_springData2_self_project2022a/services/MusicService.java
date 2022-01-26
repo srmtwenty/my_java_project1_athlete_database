@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.scott.b_springData2_self_project2022a.models.Album;
+import com.scott.b_springData2_self_project2022a.models.Composer;
 import com.scott.b_springData2_self_project2022a.models.Music;
 import com.scott.b_springData2_self_project2022a.models.Party;
 import com.scott.b_springData2_self_project2022a.models.User;
@@ -30,7 +32,7 @@ public class MusicService {
 	public Music createMusic(Music m) {
 		return musicRepository.save(m);
 	}
-	public Music updateMusic(Long id, String title, String composer, String description, String album, String performer, User host, List<Party> parties) {
+	public Music updateMusic(Long id, String title, Composer composer, String description, Album album, String performer, User host, List<Party> parties) {
 		Music m=findMusic(id);
 		m.setTitle(title);
 		m.setComposer(composer);

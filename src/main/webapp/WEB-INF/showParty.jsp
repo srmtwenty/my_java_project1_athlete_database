@@ -44,7 +44,7 @@
 		<tbody>
 			<c:forEach items="${pSwimmers}" var="swimmer">
 			<tr>
-				<td><c:out value="${swimmer.name}"/></td>
+				<td><a href="/competitions/swimmers/${swimmer.id}"><c:out value="${swimmer.name}"/></a></td>
 				<td><a href="/competitions/parties/${swimmer.id}/removeSwimmer">Remove</a></td>
 			</tr>
 			</c:forEach>
@@ -97,14 +97,6 @@
 		</select>
 		<input type="submit" value="Add Swimmer">
 	</form>
-	<c:choose> 
-		<c:when test="${loggedUser==null}">
-			<p>Login to edit party.</p>
-		</c:when>
-		<c:otherwise>
-			<a href="/competitions/parties/${party.id}/edit">Edit Party</a>
-		</c:otherwise>
-	</c:choose>
 	
 	<p>Add Coach</p>
 	<form action="/competitions/parties/${party.id}/addCoach" method="POST">
@@ -126,11 +118,20 @@
 	
 	<form action="/competitions/parties/${party.id}/addComment" method="POST">
 		<p>
-			<label>Party:</label>
+			<label>Comment:</label>
 			<textarea id="content" name="content"></textarea>
 		</p>
 		<input type="submit" value="Add Comment">
 	</form>
+	
+	<c:choose> 
+		<c:when test="${loggedUser==party.host}">
+			<a href="/competitions/parties/${party.id}/edit">Edit Party</a>
+		</c:when>
+		<c:otherwise>
+			<p>Only a host can edit party.</p>
+		</c:otherwise>
+	</c:choose>
 	
 	<%@ include file="footer.jsp" %>
 </html>

@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 
-	<form:form action="/competitions/new" method="POST" modelAttribute="competition">
+	<form:form action="/competitions/${competition.id}/edit" method="POST" modelAttribute="competition">
 		<input type="hidden" name="_method" value="PUT">
 		<p>
 			<form:label path="name">Name</form:label>

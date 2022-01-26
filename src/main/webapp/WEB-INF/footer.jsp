@@ -15,6 +15,8 @@
 		<a href="/competitions/swimmers/new">New Swimmer</a>
 		<a href="/competitions/routines/new">New Routine</a>
 		<a href="/competitions/parties/new">New Party</a>
+		<a href="/competitions/composers/new">New Composer</a>
+		<a href="/competitions/albums/new">New Album</a>
 		<a href="/competitions/musics/new">New Music</a>
 		<a href="/competitions/new">New Competition</a>
 		<a href="/competitions/nations/new">New Nation</a>

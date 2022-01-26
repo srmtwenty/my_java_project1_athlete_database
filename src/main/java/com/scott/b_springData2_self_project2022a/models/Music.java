@@ -31,10 +31,6 @@ public class Music {
 	@Size(min=5, message="Must be at least 5 characters!")
 	private String title;
 	
-	private String album;
-	
-	private String composer;
-	
 	private String performer;
 	
 	private String description;
@@ -45,13 +41,6 @@ public class Music {
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
-	
-	//@ManyToMany(fetch=FetchType.LAZY)
-	//@JoinTable(name="musics_swimmers",
-	//		joinColumns=@JoinColumn(name="music_id"),
-	//		inverseJoinColumns=@JoinColumn(name="swimmer_id")
-	//			)
-	//private List<Swimmer> swimmers;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="musics_parties",
@@ -67,16 +56,16 @@ public class Music {
 	@OneToMany(mappedBy="music", fetch=FetchType.LAZY)
 	private List<Comment> comments;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="composer_id")
+	private Composer composer;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="album_id")
+	private Album album;
+	
 	public Music() {
 	}
-	
-	//public List<Swimmer> getSwimmers() {
-	//	return swimmers;
-	//}
-
-	//public void setSwimmers(List<Swimmer> swimmers) {
-	//	this.swimmers = swimmers;
-	//}
 
 	public Long getId() {
 		return id;
@@ -109,12 +98,12 @@ public class Music {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public String getComposer() {
+	
+	public Composer getComposer() {
 		return composer;
 	}
 
-	public void setComposer(String composer) {
+	public void setComposer(Composer composer) {
 		this.composer = composer;
 	}
 
@@ -126,11 +115,11 @@ public class Music {
 		this.description = description;
 	}
 	
-	public String getAlbum() {
+	public Album getAlbum() {
 		return album;
 	}
 
-	public void setAlbum(String album) {
+	public void setAlbum(Album album) {
 		this.album = album;
 	}
 

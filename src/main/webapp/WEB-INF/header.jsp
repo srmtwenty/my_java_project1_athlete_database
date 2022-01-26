@@ -8,7 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
 	<header>
@@ -22,6 +24,8 @@
 	</c:choose>
 	<a href="/home">Home</a>
 	<a href="/competitions">All Competitions</a>
+	<a href="/competitions/albums">All Albums</a>
+	<a href="/competitions/composers">All Composers</a>
 	<a href="/competitions/musics">All Musics</a>
 	<a href="/competitions/parties">All Parties</a>
 	<a href="/competitions/swimmers">All Swimmers</a>

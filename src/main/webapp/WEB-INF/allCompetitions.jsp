@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>Insert title here</title>
+	
 </head>
 	<a href="/competitions">Sort by Name</a>
 	<a href="/competitions/yearDesc">Sort by Year Desc</a>
@@ -30,6 +31,7 @@
 				<td><c:out value="${competition.year}"/></td>
 				<td><c:out value="${competition.host.username}"/></td>
 				<td>
+					<a href="/competitions/${competition.id}/edit">Edit</a>
 					<form action="/competitions/${competition.id}/delete" method="POST">
 						<input type="hidden" name="_method" value="DELETE">
 						<input type="submit" value="Delete">
