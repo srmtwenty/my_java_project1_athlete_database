@@ -29,7 +29,7 @@ public class SwimmerService {
 		return swimmerRepository.findByBirthYear(birthYear);
 	}
 	public List<Swimmer> findByName(String name){
-		return swimmerRepository.findByNameContaining(name);
+		return swimmerRepository.findByNameIgnoreCaseContaining(name);
 	}
 	//public List<Swimmer> findByFullName(String firstname, String lastname){
 	//	return swimmerRepository.findByFirstnameAndLastnameContaining(firstname, lastname);

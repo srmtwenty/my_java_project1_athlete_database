@@ -2,19 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+	<div class="wrapper">
+			
+		<%@include file="navigator_left.jsp"%>
+			
+		<section id="section_main">
+			<article class="nav_main">
+				<h1>Nation: <c:out value="${nation.name}"/></h1>
+				<p>Number of Swimmers:<c:out value="${number}"/></p>
+				<ul>
+					<c:forEach items="${swimmers}" var="swimmer">
+					<li><a href="/swimmers/${swimmer.id}"><c:out value="${swimmer.name}"/></a></li>
+					</c:forEach>
+				</ul>
+				
+			</article>
+		</section>
 	
-	<h1>Nation: <c:out value="${nation.name}"/></h1>
-	<ul>
-		<c:forEach items="${swimmers}" var="swimmer">
-		<li><a href="/competitions/swimmers/${swimmer.id}"><c:out value="${swimmer.name}"/></a></li>
-		</c:forEach>
-	</ul>
-	<p>Number of Swimmers:<c:out value="${number}"/></p>
+	</div>
 	<%@ include file="footer.jsp" %>
 </html>

@@ -29,6 +29,12 @@ public class UserService {
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
+	public Long countByCompetitionsId(Long id) {
+		return userRepository.countByCompetitions_Id(id);
+	}
+	public Long countByAttendeesByCompetitions_Id(Long id) {
+		return userRepository.countAttendeesByCompetitions_Id(id);
+	}
 	public User createUser(User u) {
 		String hashed=BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
 		u.setPassword(hashed);

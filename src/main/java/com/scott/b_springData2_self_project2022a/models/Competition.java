@@ -42,6 +42,14 @@ public class Competition {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private User host;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="competitions_users",
+		joinColumns=@JoinColumn(name="competition_id"),
+		inverseJoinColumns=@JoinColumn(name="user_id")
+	)
+	private List<User> attendees;
+	
 	//@ManyToMany(fetch=FetchType.LAZY)
 	//@JoinTable(name="competitions_swimmers",
 	//		joinColumns=@JoinColumn(name="competition_id"),
@@ -212,6 +220,14 @@ public class Competition {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public List<User> getAttendees() {
+		return attendees;
+	}
+
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
 	}
 
 	@PrePersist

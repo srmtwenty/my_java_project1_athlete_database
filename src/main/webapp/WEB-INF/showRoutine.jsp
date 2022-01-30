@@ -38,7 +38,7 @@
 	</table>
 	
 	<h3>Add Competition</h3>
-	<form action="/competitions/routines/${r.id}/addCompetition" method="POST">	
+	<form action="/routines/${r.id}/addCompetition" method="POST">	
 		<p>
 			<select name="competition">
 				<c:forEach items="${competitions}" var="competition">

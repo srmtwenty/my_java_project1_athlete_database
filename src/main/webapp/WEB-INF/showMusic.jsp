@@ -3,17 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 
 	<h1><c:out value="${music.title}"/></h1>
 	
-	<p>Album:<a href="/competitions/albums/${album.id}"><c:out value="${music.album.title}"/></a></p>
-	<p>Composer:<a href="/competitions/composers/${composer.id}"><c:out value="${music.composer.name}"/></a></p>
+	<p>Album:<a href="/albums/${album.id}"><c:out value="${music.album.title}"/></a></p>
+	<p>Composer:<a href="/composers/${composer.id}"><c:out value="${music.composer.name}"/></a></p>
 	<p>Performer:<c:out value="${music.performer}"/></p>
 	<p>Description:<c:out value="${music.description}"/></p>
 	<p>Host:<c:out value="${music.host.username}"/></p>
@@ -34,7 +28,7 @@
 		</tbody>
 	</table>
 	
-	<form action="/competitions/musics/${music.id}/addParty" method="POST">
+	<form action="/musics/${music.id}/addParty" method="POST">
 		<select name="party">
 			<c:forEach items="${parties}" var="party">
 			<option value="${party.getId()}">
@@ -44,7 +38,7 @@
 		</select>
 		<input type="submit" value="Add Party">
 	</form>
-	<form action="/competitions/musics/${music.id}/removeParty" method="POST">
+	<form action="/musics/${music.id}/removeParty" method="POST">
 		<select name="party">
 			<c:forEach items="${parties}" var="party">
 			<option value="${party.getId()}">
@@ -61,7 +55,7 @@
 		</c:forEach>
 	</ul>
 	
-	<form action="/competitions/musics/${music.id}/addComment" method="POST">
+	<form action="/musics/${music.id}/addComment" method="POST">
 		<p>
 			<label>Comment:</label>
 			<textarea name="content" id="content"></textarea>
@@ -71,7 +65,7 @@
 	
 	<c:choose>
 		<c:when test="${loggedUser==music.host}">
-			<a href="/competitions/musics/${music.id}/edit">Edit Competition</a>
+			<a href="/musics/${music.id}/edit">Edit Competition</a>
 		</c:when>
 		<c:otherwise>
 			<p>Only a host can edit party.</p>
@@ -79,4 +73,3 @@
 	</c:choose>
 	
 	<%@ include file="footer.jsp" %>
-</html>

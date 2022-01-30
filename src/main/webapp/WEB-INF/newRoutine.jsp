@@ -3,20 +3,32 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+	<div class="wrapper">
+			
+		<%@include file="navigator_left.jsp"%>
+			
+		<section id="section_main">
+			<article class="nav_main">
+				<h1 id="h1_align">New Music</h1>
 
-	<form:form action="/competitions/routines/new" method="POST" modelAttribute="routine">
-		<p>
-			<form:label path="routineName">Name:</form:label>
-			<form:errors path="routineName"/>
-			<form:input path="routineName"/>
-		</p>
-		<input type="submit" value="Add Routine">
-	</form:form>
+				<form:form action="/routines/new" method="POST" modelAttribute="routine">
+					<div class="row2">
+						<div class="label2">
+							<form:label path="routineName">Name:</form:label>
+						</div>
+						<div class="label2">
+							<form:errors path="routineName"/>
+						</div>
+						<div class="label2">
+							<form:input path="routineName"/>
+						</div>
+					</div>
+					<div class="row2">
+						<input type="submit" value="Add Routine">
+					</div>
+				</form:form>
+			</article>
+		</section>
+	</div>
+				
 	<%@ include file="footer.jsp" %>
-</html>

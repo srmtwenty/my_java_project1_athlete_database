@@ -13,7 +13,7 @@ public interface SwimmerRepository extends CrudRepository<Swimmer, Long>{
 	List<Swimmer> findAll();
 	List<Swimmer> findByNation_NameContaining(String nation);
 	List<Swimmer> findByBirthYear(Integer birthYear);
-	List<Swimmer> findByNameContaining(String name);
+	List<Swimmer> findByNameIgnoreCaseContaining(String name);
 	//List<Swimmer> findByFirstnameAndLastnameContaining(String firstname, String lastname);
 	Long countByNation_Id(Long id);
 	List<Swimmer> findByOrderByBirthYearDesc();

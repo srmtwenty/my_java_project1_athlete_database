@@ -11,15 +11,14 @@
 </head>
 	<footer>
 		<h3>Footer</h3>
-		<a href="/competitions/nations/new">New Nation</a>
-		<a href="/competitions/swimmers/new">New Swimmer</a>
-		<a href="/competitions/routines/new">New Routine</a>
-		<a href="/competitions/parties/new">New Party</a>
-		<a href="/competitions/composers/new">New Composer</a>
-		<a href="/competitions/albums/new">New Album</a>
-		<a href="/competitions/musics/new">New Music</a>
+		<a href="/nations/new">New Nation</a>
+		<a href="/swimmers/new">New Swimmer</a>
+		<a href="/routines/new">New Routine</a>
+		<a href="/parties/new">New Party</a>
+		<a href="/composers/new">New Composer</a>
+		<a href="/albums/new">New Album</a>
+		<a href="/musics/new">New Music</a>
 		<a href="/competitions/new">New Competition</a>
-		<a href="/competitions/nations/new">New Nation</a>
 	</footer>
 </body>
 </html>

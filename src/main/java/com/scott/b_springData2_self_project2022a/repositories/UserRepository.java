@@ -11,4 +11,6 @@ import com.scott.b_springData2_self_project2022a.models.User;
 public interface UserRepository extends CrudRepository<User, Long>{
 	List<User> findAll();
 	User findByEmail(String email);
+	Long countByCompetitions_Id(Long id);
+	Long countAttendeesByCompetitions_Id(Long id);
 }

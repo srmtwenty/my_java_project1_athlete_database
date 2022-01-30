@@ -2,20 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 
-	
+
 	<h1><c:out value="${competition.name}"/></h1>
-	<p><c:out value="${competition.location}"/></p>
-	<p><c:out value="${competition.year}"/></p>
-	<p><c:out value="${competition.description}"/></p>
-	<p><c:out value="${competition.host.username}"/></p>
-	<p><c:out value="${competition.eventType}"/></p>
+	<p><strong>Location:</strong> <c:out value="${competition.location}"/></p>
+	<p><strong>Year:</strong> <c:out value="${competition.year}"/></p>
+	<p><strong>Description:</strong><c:out value="${competition.description}"/></p>
+	<p><strong>Host:</strong><c:out value="${competition.host.username}"/></p>
+	<p><strong>Event Type:</strong><c:out value="${competition.eventType}"/></p>
+	<p><strong>Users:</strong> <c:out value="${countUsers}"/></p>
+	<p><strong>Attendees:</strong> <c:out value="${countAttendees}"/></p>
 	<table>
 		<thead>
 			<tr>
@@ -27,8 +23,8 @@
 		<tbody>
 			<c:forEach items="${compParties}" var="party">
 			<tr>
-				<td><a href="/competitions/parties/${party.id}"><c:out value="${party.partyName}"/></a></td>
-				<td><a href="/competitions/routines/${party.routine.id}"><c:out value="${party.routine.routineName}"/></a></td>			
+				<td><a href="/parties/${party.id}"><c:out value="${party.partyName}"/></a></td>
+				<td><a href="/routines/${party.routine.id}"><c:out value="${party.routine.routineName}"/></a></td>			
 				<td><a href="/competitions/${party.competition.id}/remove">Remove</a></td>
 			</tr>
 			</c:forEach>
@@ -64,7 +60,7 @@
 	</form>
 	
 	<c:choose> 
-		<c:when test="${loggedUser==competitions.host}">
+		<c:when test="${loggedUser==competition.host}">
 			<a href="/competitions/${competition.id}/edit">Edit Competition</a>
 		</c:when>
 		<c:otherwise>
@@ -73,4 +69,3 @@
 	</c:choose>
 	
 	<%@ include file="footer.jsp" %>
-</html>

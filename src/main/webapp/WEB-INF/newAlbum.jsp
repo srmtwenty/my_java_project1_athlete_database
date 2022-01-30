@@ -3,20 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-	<h2>New Album</h2>
-	<form:form action="/competitions/albums/new" method="POST" modelAttribute="album">
-		<p>
-			<form:label path="title">Title:</form:label>
-			<form:errors path="title"/>
-			<form:input path="title"/>
-		</p>
-		<input type="submit" value="Create Album">
-	</form:form>
+	<div class="wrapper">
+			
+		<%@include file="navigator_left.jsp"%>
+			
+		<section id="section_main">
+			<article class="nav_main">
+				<h1 id="h1_align">New Album</h1>
+				<form:form action="/albums/new" method="POST" modelAttribute="album">
+					<div class="row2">
+						<div class="label2">
+							<form:label path="title">Title:</form:label>
+						</div>
+						<div class="label2">
+							<form:errors path="title"/>
+						</div>
+						<div class="label2">
+							<form:input path="title"/>
+						</div>
+					</div>
+					<div class="row2">
+						<input type="submit" value="Create Album">
+						<a href="/albums">Cancel</a>
+					</div>
+				</form:form>
+	
+			</article>
+		</section>
+	</div>
 	<%@ include file="footer.jsp" %>
-</html>

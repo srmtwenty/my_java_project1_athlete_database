@@ -1,9 +1,217 @@
 @charset "UTF-8";
+html{
+	height: 100%;
+}
+body{
+	border: 3px dotted black;
+	min-height: 100%;
+	width: 1080px;
+	min-width: 600px;
+	margin: 0 auto;
+}
 h1{
 	color:red;
 }
 
+.col-35{
+	float: left;
+    width: 34%;
+    margin-top: 6px;
+}
+.col-65{
+	float: left;
+    width: 66%;
+    margin-top: 6px;
+}
+.col-8{
+	float: left;
+    width: 8%;
+    margin-top: 6px;
+    border: 1px dotted red;
+}
+.col-92{
+	float: left;
+    width: 90%;
+    margin-top: 6px;
+}
+
+.col-8-textarea{
+	float: left;
+    width: 8%;
+    margin-top: 6px;
+}
+.col-92-textarea{
+	float: left;
+    width: 92%;
+    margin-top: 6px;
+}
+
+.row input{
+	width: 90%;
+}
+.row textarea{
+	width: 70%;
+}
+#h1_align{
+	text-align: center;
+}
+.row2{
+	padding: 10px 0px 0px 0px;
+	border: 1px dotted yellow;
+}
+.row2_button{
+	padding: 10px 0px 0px 0px;
+}
+
+.buttonE{
+	margin: 2px;
+	padding: 0px 5px 0px 5px;
+	background-color: yellow;
+	border: 1px solid black;
+	border-radius: 2px;
+}
+.buttonD{
+	margin: 2px;
+	padding: 0px 5px 0px 5px;
+	background-color: orange;
+	border: 1px solid black;
+	border-radius: 2px;
+}
+
+textarea{
+	width: 70%;
+}
 table, th, td{
 	border: 1px solid black;
 	text-align: center;
 }
+tr:nth-child(even){
+	background-color: #f2f2f2;
+	
+}
+table{
+	padding:1px;
+}
+td{
+	padding:8px;
+}
+
+th {
+    background: #a5f0ff;
+    color: black;
+    padding:8px;
+}
+
+#nav_top{
+	background: yellow;
+	width:620px;
+	margin: auto;
+	padding: 8px 7px 8px 7px;
+}
+
+.nav_side{
+	color: green;
+}
+
+#welcome{
+	background: gray;
+	margin-left: auto;
+	height:10px;
+}
+
+header{
+	border: 2px dotted blue;
+}
+
+header h1{
+	color: blue;
+}
+
+header h3{
+	border: 1px dotted black;
+	width: 200px;
+	
+}
+
+#logout{
+	width: 70px;
+	padding: 0px 5px 0px 5px;
+	border: 1px solid black;
+	margin-left: auto;
+}
+#home_name{
+	border: 1.5px solid black;
+	margin: auto;
+	width:760px;
+	padding: 3px 8px 3px 8px;
+}
+
+
+article{
+	
+	border: 1px dotted red;
+	
+}
+
+article p{
+	padding-left: 17px;
+}
+
+.nav_main{
+	padding: 0px 15px 15px 15px;
+	
+}
+
+#formS{
+	
+	margin:10px;
+}
+#inputLen{
+	width:68%;
+}
+
+
+
+.button_group{
+	background: green;
+	margin: auto;
+	display: block;
+}
+
+.wrapper_loginRegis{
+	background:yellow;
+	padding: 40px 0px 0px 0px;
+	display: flex;
+}
+#loginRegis{
+	width: 50%;
+	border: 1px solid black;
+	margin: 8px;
+	padding: 0px 10px 20px 20px;
+}
+
+.wrapper{
+	min-height: 700px;
+
+	display: flex;
+}
+section{
+	border: 1px solid black;
+	margin: 5px;
+	padding: 12px;
+}
+
+#section_side{
+	background: orange;
+	width: 23%;
+}
+#section_side h2{
+	padding-left: 17px;
+}
+
+#b_main{
+
+	width: 77%;
+}
+
+

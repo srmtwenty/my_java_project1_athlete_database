@@ -22,7 +22,7 @@
 		<button type="submit">Upload</button>
 	</form>
 	
-	<form:form action="/competitions/swimmers/${swimmer.id}/edit" method="POST" modelAttribute="swimmer">
+	<form:form action="/swimmers/${swimmer.id}/edit" method="POST" modelAttribute="swimmer">
 		<input type="hidden" name="_method" value="PUT">
 		<p>
 			<form:label path="name">Name:</form:label>

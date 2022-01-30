@@ -26,7 +26,7 @@ public class ComposerController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/competitions/composers/{id}")
+	@RequestMapping("/composers/{id}")
 	public String showComposer(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
@@ -39,7 +39,7 @@ public class ComposerController {
 		model.addAttribute("composer", c);
 		return "showComposer.jsp";
 	}
-	@RequestMapping("/competitions/composers")
+	@RequestMapping("/composers")
 	public String allComposers(Model model, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
@@ -47,11 +47,11 @@ public class ComposerController {
 		}
 		User host = userService.findUser(loggedId);
 		List<Composer> composers=composerService.allComposers();
-		model.addAttribute("host", host);
+		model.addAttribute("loggedUser", host);
 		model.addAttribute("composers", composers);
 		return "allComposers.jsp";
 	}
-	@RequestMapping("/competitions/composers/new")
+	@RequestMapping("/composers/new")
 	public String newComposer(@ModelAttribute("composer") Composer composer, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
@@ -59,7 +59,7 @@ public class ComposerController {
 		}
 		return "newComposer.jsp";
 	}
-	@RequestMapping(value="/competitions/composers/new", method=RequestMethod.POST)
+	@RequestMapping(value="/composers/new", method=RequestMethod.POST)
 	public String createComposer(@Valid @ModelAttribute("composer") Composer composer, BindingResult result, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
@@ -68,9 +68,9 @@ public class ComposerController {
 		User host=userService.findUser(loggedId);
 		composer.setHost(host);
 		composerService.createComposer(composer);
-		return "redirect:/competitions/composers/"+composer.getId();
+		return "redirect:/composers/"+composer.getId();
 	}
-	@RequestMapping("/competitions/composers/{id}/edit")
+	@RequestMapping("/composers/{id}/edit")
 	public String editComposer(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
@@ -80,7 +80,7 @@ public class ComposerController {
 		model.addAttribute("composer", c);
 		return "editComposer.jsp";
 	}
-	@RequestMapping(value="/competitions/composers/{id}/edit", method=RequestMethod.PUT)
+	@RequestMapping(value="/composers/{id}/edit", method=RequestMethod.PUT)
 	public String updateComposer(@Valid @ModelAttribute("composer") Composer composer, BindingResult result, @PathVariable("id") Long id, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
@@ -90,15 +90,15 @@ public class ComposerController {
 		composer.setHost(host);
 		
 		composerService.updateComposer(composer);
-		return "redirect:/competitions/composers/"+id;
+		return "redirect:/composers/"+id;
 	}
-	@RequestMapping(value="/competitions/composers/{id}/delete")
+	@RequestMapping(value="/composers/{id}/delete")
 	public String deleteComposer(@PathVariable("id") Long id, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
 			return "redirect:/logout";
 		}
 		composerService.deleteComposer(id);
-		return "redirect:/competitions/composers";
+		return "redirect:/composers";
 	}
 }

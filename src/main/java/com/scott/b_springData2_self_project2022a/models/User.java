@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -58,6 +61,13 @@ public class User {
 	
 	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
 	private List<Composer> Composers;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="competitions_users",
+		joinColumns=@JoinColumn(name="user_id"),
+		inverseJoinColumns=@JoinColumn(name="competition_id")
+	)
+	private List<Competition> participatedCompetitions;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -179,6 +189,14 @@ public class User {
 
 	public void setComposers(List<Composer> composers) {
 		Composers = composers;
+	}
+	
+	public List<Competition> getParticipatedCompetitions() {
+		return participatedCompetitions;
+	}
+
+	public void setParticipatedCompetitions(List<Competition> participatedCompetitions) {
+		this.participatedCompetitions = participatedCompetitions;
 	}
 
 	@PrePersist

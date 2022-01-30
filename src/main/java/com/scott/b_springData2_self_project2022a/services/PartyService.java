@@ -23,6 +23,9 @@ public class PartyService {
 	public List<Party> allParties(){
 		return partyRepository.findAll();
 	}
+	public Long countBySwimmerId(Long id) {
+		return partyRepository.countBySwimmers_Id(id);
+	}
 	public Party findParty(Long id) {
 		Optional<Party> optional=partyRepository.findById(id);
 		if(optional.isPresent()) {
