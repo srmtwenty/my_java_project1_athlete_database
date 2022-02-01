@@ -8,7 +8,7 @@
 		<div id="b_main">
 			<section>
 				<article class="nav_main">
-					<h1>Name:<c:out value="${party.partyName}"/></h1>
+					<h1><c:out value="${party.partyName}"/></h1>
 					
 					<p><strong>Routine:</strong> <c:out value="${party.routine.routineName}"/></p>
 					<p><strong>Nation:</strong> <c:out value="${party.nation.name}"/></p>
@@ -17,10 +17,10 @@
 					
 				</article>
 			</section>
-			<section id="section_show1">
+			<section class="section_show1">
 				<article class="sub-wrap">
-					<div><strong>Coaches:</strong></div>
-					<table>
+					<p><strong>Coaches:</strong></p>
+					<table class="tableMar">
 						<thead>
 							<tr>
 								<th>Coach</th>
@@ -38,7 +38,7 @@
 					</table>
 				</article>
 				
-				<article>
+				<article class="sub-wrap">
 					<p>Add Coach</p>
 					<form action="/parties/${party.id}/addCoach" method="POST">
 						<select name="coach">
@@ -53,9 +53,9 @@
 				</article>
 			</section>
 			
-			<section>
-				<article>
-					<div><strong>Swimmers:</strong></div>
+			<section class="section_show1">
+				<article class="sub-wrap">
+					<p><strong>Swimmers:</strong></p>
 					<table>
 						<thead>
 							<tr>
@@ -74,7 +74,7 @@
 					</table>
 				</article>
 				
-				<article>
+				<article class="sub-wrap">
 					<p>Add Swimmer</p>
 					<form action="/parties/${party.id}/addSwimmer" method="POST">
 						<select name="swimmer">
@@ -89,9 +89,9 @@
 				</article>
 			</section>
 			
-			<section>
-				<article>
-					<div><strong>Competitions:</strong></div>
+			<section class="section_show1">
+				<article class="sub-wrap">
+					<p><strong>Competitions:</strong></p>
 					<table>
 						<thead>
 							<tr>
@@ -101,7 +101,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><c:out value="${competition.name}"/></td>
+								<td><a href="/competitions/${competition.id}"><c:out value="${competition.name}"/></a></td>
 								<td><a href="/competition/${competition.id}/remove">Remove</a></td>
 							</tr>
 						</tbody>
@@ -110,10 +110,9 @@
 				
 			</section>
 			
-			<section>
-				<article>
-					<div><strong>Music:</strong></div>
-					
+			<section class="section_show1">
+				<article class="sub-wrap">
+					<p><strong>Music:</strong></p>
 					<table>
 						<thead>
 							<tr>
@@ -125,16 +124,14 @@
 							<c:forEach items="${pMusics}" var="pMusic">
 								<tr>
 									<td><a href="/musics/${pMusic.id}"><c:out value="${pMusic.title}"/></a></td>
-									<td></td>
+									<td><a href="/parties/${party.id}/removeMusic?music=${pMusic.id}">Remove</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-							
-					
 				</article>
 					
-				<article>
+				<article class="sub-wrap">
 					<p>Add Music</p>
 					<form action="/parties/${party.id}/addMusic" method="POST">
 						<select name="music">

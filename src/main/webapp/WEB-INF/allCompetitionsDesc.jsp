@@ -4,40 +4,62 @@
 <%@ page isErrorPage="true"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="js/app.js"></script>
-</head>
-	<a href="/competitions">Sort by Name</a>
-	<a href="/competitions/yearDesc">Sort by Year Desc</a>
-	<a href="/competitions/yearAsc">Sort by Year Asc</a>
-	
-	<table>
-		<thead>
-			<tr>
-				<th>Competition</th>
-				<th>Location</th>
-				<th>Year</th>
-				<th>Host</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${competitionsDesc}" var="competition">
-			<tr>
-				<td><a href="/competitions/${competition.id}"><c:out value="${competition.name}"/></a></td>
-				<td><c:out value="${competition.location}"/></td>
-				<td><c:out value="${competition.year}"/></td>
-				<td><c:out value="${competition.host.username}"/></td>
-				<td></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
 
+<div class="wrapper">
+		
+	<%@include file="navigator_left.jsp"%>
+	<div id="b_main">		
+		<section id="section_main">
+	
+			<article class="nav_main">
+				<h2>Competitions(sort by year descend)</h2>
+				
+				<nav>
+					<a href="/competitions">Sort by Name</a> |
+					<a href="/competitions/yearDesc">Sort by Year Desc</a> |
+					<a href="/competitions/yearAsc">Sort by Year Asc</a> |
+				</nav>
+				<table>
+					<thead>
+						<tr>
+							<th>Competition</th>
+							<th>Location</th>
+							<th>Year</th>
+							<th>Host</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${competitionsDesc}" var="competition">
+						<tr>
+							<td><a href="/competitions/${competition.id}"><c:out value="${competition.name}"/></a></td>
+							<td><c:out value="${competition.location}"/></td>
+							<td><c:out value="${competition.year}"/></td>
+							<td><c:out value="${competition.host.username}"/></td>
+							<td>
+								<c:choose>
+									<c:when test="${loggedUser.id==competition.host.id}">
+										<a href="/competitions/${competition.id}/edit">Edit</a>
+										<form action="/competitions/${competition.id}/delete" method="POST">
+											<input type="hidden" name="_method" value="DELETE">
+											<input type="submit" value="Delete">
+										</form>
+									</c:when>
+									<c:when test="${competition.attendees.contains(loggedUser)}">
+										Joined <a href="/competitions/${competition.id}/cancel">Cancel</a>
+									</c:when>
+									<c:otherwise>
+										<a href="/competitions/${competition.id}/join">Join</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</article>
+	
+		</section>
+	</div>
+</div>
 	<%@ include file="footer.jsp" %>
-</html>

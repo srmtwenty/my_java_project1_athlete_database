@@ -20,7 +20,20 @@
 			</form>
 			
 		</article>
-			
+	
+				<article>
+					<ul>
+						<li><a href="/nations/new">New Nation</a></li>
+						<li><a href="/swimmers/new">New Swimmer</a></li>
+						<li><a href="/routines/new">New Routine</a></li>
+						<li><a href="/parties/new">New Party</a></li>
+						<li><a href="/composers/new">New Composer</a></li>
+						<li><a href="/albums/new">New Album</a></li>
+						<li><a href="/musics/new">New Music</a></li>
+						<li><a href="/competitions/new">New Competition</a></li>
+					</ul>
+				</article>	
+
 		<article>
 			<h2>Links</h2>
 			<ul>
@@ -30,6 +43,8 @@
 				<li><a href="https://www.gettyimages.com/photos/artistic-swimming?family=editorial&phrase=artistic%20swimming&sort=newest#license">Getty Images</a></li>
 			</ul>
 		</article>
+		
+		
 		
 		<article>
 					

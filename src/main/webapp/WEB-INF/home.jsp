@@ -4,10 +4,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="header.jsp"%>
 	
-	<div class="wrapper">
+<div class="wrapper">
 		
-		<%@include file="navigator_left.jsp"%>
-		
+	<%@include file="navigator_left.jsp"%>
+	<div id="b_main">	
 		<section id="section_main">
 			<article class="nav_main">
 				<h2>Competitions</h2>
@@ -47,18 +47,18 @@
 			
 			<article>
 					
-					<h2>Nations</h2>
-					<ul>
+				<h2>Nations</h2>
+				<ul>
 						
-						<c:forEach items="${nations}" var="nation">
-							<li>
-								<a href="/nations/${nation.id}"><c:out value="${nation.name}"/></a>
-							</li>
-						</c:forEach>
-					</ul>
-				</article>
+					<c:forEach items="${nations}" var="nation">
+						<li>
+							<a href="/nations/${nation.id}"><c:out value="${nation.name}"/></a>
+						</li>
+					</c:forEach>
+				</ul>
+			</article>
 				
 		</section>
-	
-	</div>
-	<%@ include file="footer.jsp" %>
+	</div>	
+</div>
+<%@ include file="footer.jsp" %>

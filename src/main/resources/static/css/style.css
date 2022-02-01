@@ -192,15 +192,25 @@ article p{
 
 .wrapper{
 	min-height: 700px;
-
+	padding: 5px 0px 5px 0px;
 	display: flex;
 }
 section{
 	border: 1px solid black;
+	width:95%;
 	margin: 5px;
-	padding: 12px;
+	padding: 8px;
+}
+.section_show1{
+	display:flex;
+	justify-content:space-between;
 }
 
+
+.sub-warp{
+	
+	border: 3px dotted yellow;
+}
 #section_side{
 	background: orange;
 	width: 23%;

@@ -108,7 +108,13 @@ public class CompetitionController {
 		return "home.jsp";
 	}
 	@RequestMapping("/competitions/new")
-	public String newCompetition(@ModelAttribute("competition") Competition competition) {
+	public String newCompetition(@ModelAttribute("competition") Competition competition, Model model, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:";
+		}
+		User u=userService.findUser(loggedId);
+		model.addAttribute("loggedUser", u);
 		return "newCompetition.jsp";
 	}
 	
@@ -586,7 +592,26 @@ public class CompetitionController {
 		Swimmer s=swimmerService.findSwimmer(swimmerId);
 		
 		List<Swimmer> swimmers=p.getSwimmers();
+		Routine r=p.getRoutine();
+		
+		
 		swimmers.add(s);
+		if(swimmers.contains(s)) {
+			System.out.println("You already has that object");
+			return "redirect:/parties/"+id;
+		}
+		if(r.getId()==1 || r.getId()==2) {
+			if(swimmers.size()>1) {
+				System.out.println("No more than 1 swimmer!");
+				return "redirect:/parties/"+id;
+			}
+		}
+		else if(r.getId()==3 || r.getId()==4) {
+			if(swimmers.size()>2) {
+				System.out.println("No more than 2 swimmers!");
+				return "redirect:/parties/"+id;
+			}
+		}
 		p.setSwimmers(swimmers);
 		partyService.updateParty(p);
 		return "redirect:/parties/"+id;
@@ -606,6 +631,25 @@ public class CompetitionController {
 		partyService.updateParty(p);
 		return "redirect:/parties/"+id;
 	}
+	
+	@RequestMapping("/parties/{id}/removeMusic")
+	public String removeMusic(@PathVariable("id") Long id, @RequestParam("music") Long musicId, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		Party p=partyService.findParty(id);
+		Music m=musicService.findMusic(musicId);
+		
+		List<Music> musics=p.getMusics();
+		musics.remove(m);
+		p.setMusics(musics);
+		partyService.updateParty(p);
+		return "redirect:/parties/"+id;
+	}
+	
+	
+	
 	
 	@RequestMapping("/parties/{id}/removeSwimmer")
 	public String removeSwimmer(@PathVariable("id") Long id, @RequestParam(value="swimmer") Long swimmerId, HttpSession session) {

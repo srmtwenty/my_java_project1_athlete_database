@@ -3,14 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 
-	<div class="wrapper">
+<div class="wrapper">
 		
-		<%@include file="navigator_left.jsp"%>
-		
+	<%@include file="navigator_left.jsp"%>
+	<div id="b_main">		
 		<section id="section_main">
 	
 			<article class="nav_main">
-				<h1>Competitions</h1>
+				<h2>Competitions</h2>
 				
 				<nav>
 					<a href="/competitions">Sort by Name</a> |
@@ -21,7 +21,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Competition</th>
+							<th>Competition(sort by name)</th>
 							<th>Location</th>
 							<th>Year</th>
 							<th>Host</th>
@@ -60,4 +60,5 @@
 	
 		</section>
 	</div>
-	<%@ include file="footer.jsp" %>
+</div>	
+<%@ include file="footer.jsp" %>

@@ -5,8 +5,8 @@
 <%@ include file="header.jsp" %>
 <div class="wrapper">
 			
-		<%@include file="navigator_left.jsp"%>
-			
+	<%@include file="navigator_left.jsp"%>
+	<div id="b_main">		
 		<section id="section_main">
 			<article class="nav_main">
 				<h2>Edit Composer</h2>
@@ -24,5 +24,5 @@
 			</article>
 		</section>
 	</div>
-	<%@ include file="footer.jsp" %>
-</html>
+</div>	
+<%@ include file="footer.jsp" %>

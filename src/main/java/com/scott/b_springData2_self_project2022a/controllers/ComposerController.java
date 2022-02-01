@@ -52,11 +52,14 @@ public class ComposerController {
 		return "allComposers.jsp";
 	}
 	@RequestMapping("/composers/new")
-	public String newComposer(@ModelAttribute("composer") Composer composer, HttpSession session) {
+	public String newComposer(@ModelAttribute("composer") Composer composer, HttpSession session, Model model) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
 		if(loggedId==null) {
 			return "redirect:/logout";
 		}
+		
+		User u=userService.findUser(loggedId);
+		model.addAttribute("loggedUser", u);
 		return "newComposer.jsp";
 	}
 	@RequestMapping(value="/composers/new", method=RequestMethod.POST)

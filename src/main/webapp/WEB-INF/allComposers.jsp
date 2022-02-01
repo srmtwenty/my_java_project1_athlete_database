@@ -3,10 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 
-	<div class="wrapper">
-		
+<div class="wrapper">	
 	<%@include file="navigator_left.jsp"%>
-
+	<div id="b_main">	
 	<section id="section_main">
 		<article class="nav_main">
 			<h2>All Composers</h2>
@@ -40,6 +39,6 @@
 			</table>
 		</article>
 	</section>
-	
-	</div>
-	<%@ include file="footer.jsp" %>
+	</div>	
+</div>
+<%@ include file="footer.jsp" %>

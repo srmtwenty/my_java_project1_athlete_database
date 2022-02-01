@@ -4,14 +4,14 @@
 <%@ page isErrorPage="true"%>
 <%@ include file="header.jsp" %>
 
-	<div class="wrapper">
+<div class="wrapper">
 		
-		<%@include file="navigator_left.jsp"%>
-		
+	<%@include file="navigator_left.jsp"%>
+	<div id="b_main">	
 		<section id="section_main">
 			<article class="nav_main">
 
-				<h1>Swimmers List</h1>
+				<h2>All Swimmers</h2>
 				<table>
 					<thead>
 						<tr>
@@ -46,4 +46,5 @@
 			</article>
 		</section>
 	</div>
+</div>
 <%@ include file="footer.jsp" %>

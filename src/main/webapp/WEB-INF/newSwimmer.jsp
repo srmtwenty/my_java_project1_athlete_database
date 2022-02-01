@@ -3,11 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="header.jsp" %>
-	
-	<div class="wrapper">
-		
-		<%@include file="navigator_left.jsp"%>
-		
+<div class="wrapper">
+	<%@include file="navigator_left.jsp"%>
+	<div id="b_main">		
 		<section id="section_main">
 			<article class="nav_main">
 				<h1 id="h1_align">New Swimmer</h1>
@@ -70,4 +68,5 @@
 			</article>
 		</section>
 	</div>	
-	<%@ include file="footer.jsp" %>
+</div>	
+<%@ include file="footer.jsp" %>
