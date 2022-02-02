@@ -14,8 +14,13 @@
 				<p><strong>Description:</strong><c:out value="${competition.description}"/></p>
 				<p><strong>Host:</strong><c:out value="${competition.host.username}"/></p>
 				<p><strong>Event Type:</strong><c:out value="${competition.eventType}"/></p>
-				<p><strong>Users:</strong> <c:out value="${countUsers}"/></p>
-				<p><strong>Attendees:</strong> <c:out value="${countAttendees}"/></p>
+				<p><strong>Attendees:</strong></p>
+				<ul>
+					<c:forEach items="${findAllByComp}" var="findA">
+						<li><c:out value="${findA.username}"/></li>
+					</c:forEach>
+				</ul>
+				<p><strong>Number of Attendees:</strong> <c:out value="${countByComp}"/></p>
 				<table>
 					<thead>
 						<tr>
@@ -34,7 +39,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			
+				
 				
 				<%-- <h3>Add Party</h3>
 				<form action="/competitions/${competition.id}/addParty" method="POST">

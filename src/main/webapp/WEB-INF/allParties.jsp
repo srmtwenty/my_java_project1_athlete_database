@@ -28,7 +28,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${loggedUser==party.host}">
-										<a href="/parties/${party.id}/edit" class="buttonE">Edit</a>|
+										<a href="/parties/${party.id}/edit" class="buttonE">Edit</a>
 										<a href="/parties/${party.id}/delete" class="buttonD">Delete</a>
 									</c:when>
 									<c:otherwise>

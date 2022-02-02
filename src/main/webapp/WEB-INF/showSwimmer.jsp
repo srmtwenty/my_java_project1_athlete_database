@@ -7,8 +7,6 @@
 	<div id="b_main">	
 		<section id="section_main">
 			<article class="nav_main">
-
-	
 				<h1><c:out value="${swimmer.name}"/></h1>
 				<p><strong>Nation:</strong><a href="/nations/${swimmer.nation.id}"><c:out value="${swimmer.nation.name}"/></a></p>
 				<p><strong>Birth year:</strong><c:out value="${swimmer.birthYear}"/></p>
@@ -33,6 +31,25 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<p>Tags:</p>
+				<ul>
+					<c:forEach items="${tags}" var="t">
+						<li><a href="/tags/${t.id}"><c:out value="${t.tagName}"/></a> <a href="/swimmers/${swimmer.id}/removeTag?tagCategory=${t.id}">Remove</a></li>
+					</c:forEach>
+				</ul>
+				<form action="/swimmers/${swimmer.id}/addTag" method="POST">
+					<label>Tag:</label>
+					<select id="tagName" name="tagName">
+						<c:forEach items="${allTags}" var="tag">
+							<option value="${tag.id}">
+								<c:out value="${tag.tagName}"/>
+							</option>
+						</c:forEach>
+					</select>
+						
+					<input type="submit" value="Add Tag">
+				</form>
 				
 				<p>Comments:</p>
 				<ul>

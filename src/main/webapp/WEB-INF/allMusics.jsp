@@ -34,8 +34,8 @@
 							<td>
 								<c:choose>
 									<c:when test="${loggedUser==music.host}">
-										<a href="/musics/${music.id}/edit">Edit</a>
-										<a href="/musics/${music.id}/delete">Delete</a>
+										<a href="/musics/${music.id}/edit" class="buttonE">Edit</a>
+										<a href="/musics/${music.id}/delete" class="buttonD">Delete</a>
 									</c:when>
 									<c:otherwise>
 										None

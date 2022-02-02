@@ -25,8 +25,8 @@
 						<td>
 							<c:choose>
 								<c:when test="${loggedUser==composer.host}">	
-									<a href="/composers/${composer.id}/edit">Edit</a>
-									<a href="/composers/${composer.id}/delete">Delete</a>
+									<a href="/composers/${composer.id}/edit" class="buttonE">Edit</a>
+									<a href="/composers/${composer.id}/delete" class="buttonD">Delete</a>
 								</c:when>
 								<c:otherwise>
 									None

@@ -30,6 +30,7 @@
 						<li><a href="/composers/new">New Composer</a></li>
 						<li><a href="/albums/new">New Album</a></li>
 						<li><a href="/musics/new">New Music</a></li>
+						<li><a href="/tags/new">New Tag</a></li>
 						<li><a href="/competitions/new">New Competition</a></li>
 					</ul>
 				</article>	

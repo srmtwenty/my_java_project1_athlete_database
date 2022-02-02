@@ -40,11 +40,8 @@
 				<td>
 								<c:choose>
 									<c:when test="${loggedUser.id==competition.host.id}">
-										<a href="/competitions/${competition.id}/edit">Edit</a>
-										<form action="/competitions/${competition.id}/delete" method="POST">
-											<input type="hidden" name="_method" value="DELETE">
-											<input type="submit" value="Delete">
-										</form>
+										<a href="/competitions/${competition.id}/edit" class="buttonE">Edit</a>
+										<a href="/competitions/${competition.id}/delete" class="buttonD">Delete</a>
 									</c:when>
 									<c:when test="${competition.attendees.contains(loggedUser)}">
 										Joined <a href="/competitions/${competition.id}/cancel">Cancel</a>

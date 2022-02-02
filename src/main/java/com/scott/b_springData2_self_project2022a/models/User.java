@@ -54,13 +54,16 @@ public class User {
 	private List<Swimmer> swimmers;
 	
 	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
-	private List<Comment> Comments;
+	private List<Comment> comments;
 	
 	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
 	private List<Album> albums;
 	
 	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
-	private List<Composer> Composers;
+	private List<Composer> composers;
+	
+	@OneToMany(mappedBy="host", fetch=FetchType.LAZY)
+	private List<TagCategory> tagCategories;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="competitions_users",
@@ -168,11 +171,11 @@ public class User {
 	}
 	
 	public List<Comment> getComments() {
-		return Comments;
+		return comments;
 	}
 
 	public void setComments(List<Comment> comments) {
-		Comments = comments;
+		this.comments = comments;
 	}
 	
 	public List<Album> getAlbums() {
@@ -184,13 +187,21 @@ public class User {
 	}
 
 	public List<Composer> getComposers() {
-		return Composers;
+		return composers;
 	}
 
 	public void setComposers(List<Composer> composers) {
-		Composers = composers;
+		this.composers = composers;
 	}
 	
+	public List<TagCategory> getTagCategories() {
+		return tagCategories;
+	}
+
+	public void setTags(List<TagCategory> tags) {
+		this.tagCategories = tags;
+	}
+
 	public List<Competition> getParticipatedCompetitions() {
 		return participatedCompetitions;
 	}

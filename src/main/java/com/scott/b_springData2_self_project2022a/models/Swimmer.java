@@ -82,6 +82,13 @@ public class Swimmer {
 			)
 	private List<Party> cParties;
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="swimmers_tagCategories",
+		joinColumns=@JoinColumn(name="swimmer_id"),
+		inverseJoinColumns=@JoinColumn(name="tagCategory_id")
+		)
+	private List<TagCategory> tagCategories;
+	
 	@OneToMany(mappedBy="swimmer", fetch=FetchType.LAZY)
 	private List<Comment> comments;
 	
@@ -204,9 +211,18 @@ public class Swimmer {
 //		this.groups = groups;
 //	}
 
-
 	public List<Party> getParties() {
 		return parties;
+	}
+	
+	
+	public List<TagCategory> getTagCategories() {
+		return tagCategories;
+	}
+
+
+	public void setTagCategories(List<TagCategory> tagCategories) {
+		this.tagCategories = tagCategories;
 	}
 
 
@@ -214,21 +230,17 @@ public class Swimmer {
 		this.parties = parties;
 	}
 
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;

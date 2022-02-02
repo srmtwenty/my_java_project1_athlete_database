@@ -104,7 +104,7 @@ th {
 
 #nav_top{
 	background: yellow;
-	width:620px;
+	width:680px;
 	margin: auto;
 	padding: 8px 7px 8px 7px;
 }
@@ -114,9 +114,11 @@ th {
 }
 
 #welcome{
-	background: gray;
+	background: cyan;
 	margin-left: auto;
-	height:10px;
+	
+	border: 2px solid black;
+	margin-top: 10px;
 }
 
 header{
@@ -138,6 +140,7 @@ header h3{
 	padding: 0px 5px 0px 5px;
 	border: 1px solid black;
 	margin-left: auto;
+	
 }
 #home_name{
 	border: 1.5px solid black;
@@ -168,14 +171,6 @@ article p{
 }
 #inputLen{
 	width:68%;
-}
-
-
-
-.button_group{
-	background: green;
-	margin: auto;
-	display: block;
 }
 
 .wrapper_loginRegis{

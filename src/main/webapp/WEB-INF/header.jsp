@@ -32,7 +32,8 @@
 			<a href="/composers">All Composers</a> |
 			<a href="/musics">All Musics</a> |
 			<a href="/parties">All Parties</a> |
-			<a href="/swimmers">All Swimmers</a>
+			<a href="/swimmers">All Swimmers</a> |
+			<a href="/tags">All Tags</a>
 		</nav>
 		
 	</header>

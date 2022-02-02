@@ -30,8 +30,8 @@
 								<c:choose>
 									<c:when test="${loggedUser==competition.host}">
 										<div class="button_group">
-											<a href="/competitions/${competition.id}/edit">Edit</a> |
-											<a href="/competitions/${competition.id}/delete">Delete</a> 
+											<a href="/competitions/${competition.id}/edit" class="buttonE">Edit</a>
+											<a href="/competitions/${competition.id}/delete" class="buttonD">Delete</a> 
 										</div>
 									</c:when>
 									<c:otherwise>

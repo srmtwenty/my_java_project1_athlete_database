@@ -24,6 +24,7 @@ import com.scott.b_springData2_self_project2022a.models.Nation;
 import com.scott.b_springData2_self_project2022a.models.Party;
 import com.scott.b_springData2_self_project2022a.models.Routine;
 import com.scott.b_springData2_self_project2022a.models.Swimmer;
+import com.scott.b_springData2_self_project2022a.models.TagCategory;
 import com.scott.b_springData2_self_project2022a.models.User;
 import com.scott.b_springData2_self_project2022a.services.AlbumService;
 import com.scott.b_springData2_self_project2022a.services.CommentService;
@@ -34,6 +35,7 @@ import com.scott.b_springData2_self_project2022a.services.NationService;
 import com.scott.b_springData2_self_project2022a.services.PartyService;
 import com.scott.b_springData2_self_project2022a.services.RoutineService;
 import com.scott.b_springData2_self_project2022a.services.SwimmerService;
+import com.scott.b_springData2_self_project2022a.services.TagCategoryService;
 import com.scott.b_springData2_self_project2022a.services.UserService;
 
 @Controller
@@ -60,7 +62,8 @@ public class CompetitionController {
 	private AlbumService albumService;
 	@Autowired
 	private ComposerService composerService;
-	
+	@Autowired
+	private TagCategoryService tagService;
 	
 	private int number=0;
 	public int getNumber() {
@@ -158,11 +161,12 @@ public class CompetitionController {
 		List<Comment> cComments=c.getComments();
 		model.addAttribute("cComments", cComments);
 		
-		Long countUsers=userService.countByCompetitionsId(id);
-		model.addAttribute("countUsers", countUsers);
+		Long countByComp = userService.countByParticipatedCompetitionsId(id);
+		model.addAttribute("countByComp", countByComp);
 		
-		Long countAttendees=userService.countByAttendeesByCompetitions_Id(id);
-		model.addAttribute("countAttendees", countAttendees);
+		List<User> findAllByComp =userService.findAllByCompetitionsId(id);
+		model.addAttribute("findAllByComp", findAllByComp);
+		
 		return "showCompetition.jsp";
 	}
 	@RequestMapping("/competitions/{id}/edit")
@@ -316,7 +320,11 @@ public class CompetitionController {
 		Long partyNumbers=partyService.countBySwimmerId(id);
 		model.addAttribute("partyNumbers", partyNumbers);
 		
+		List<TagCategory> tags=s.getTagCategories();
+		model.addAttribute("tags", tags);
 		
+		List<TagCategory> allTags=tagService.allTags();
+		model.addAttribute("allTags", allTags);
 		return "showSwimmer.jsp";
 	}
 	@RequestMapping("/swimmers/{id}/edit")
@@ -527,6 +535,7 @@ public class CompetitionController {
 		
 		Competition c=p.getCompetition();
 		model.addAttribute("competition", c);
+		
 		return "showParty.jsp";
 	}
 	
@@ -647,9 +656,6 @@ public class CompetitionController {
 		partyService.updateParty(p);
 		return "redirect:/parties/"+id;
 	}
-	
-	
-	
 	
 	@RequestMapping("/parties/{id}/removeSwimmer")
 	public String removeSwimmer(@PathVariable("id") Long id, @RequestParam(value="swimmer") Long swimmerId, HttpSession session) {
@@ -985,6 +991,109 @@ public class CompetitionController {
 		return "redirect:/swimmers";
 	}
 	
+	@RequestMapping("/tags")
+	public String allTags(HttpSession session, Model model) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		User u =userService.findUser(loggedId);
+		model.addAttribute("loggedUser", u);
+		List<TagCategory> tags=tagService.allTags();
+		model.addAttribute("tags", tags);
+		return "allTags.jsp";
+	}
+	@RequestMapping(value="/tags/{id}/delete", method=RequestMethod.DELETE)
+	public String deleteTag(@PathVariable("id") Long id) {
+		tagService.deleteTag(id);
+		return "redirect:/tags";
+	}
+
+	@RequestMapping("/tags/new")
+	public String newTag(@ModelAttribute("tagCategory") TagCategory tagCategory, Model model, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		User u =userService.findUser(loggedId);
+		model.addAttribute("loggedUser", u);
+		return "newTagCategory.jsp";
+	}
+	@RequestMapping(value="/tags/new", method=RequestMethod.POST)
+	public String createTag(@Valid @ModelAttribute("tagCategory") TagCategory tagCategory, BindingResult result) {
+		if(result.hasErrors()) {
+			return "newTagCategory.jsp";
+		}
+		tagService.createTag(tagCategory);
+		return "redirect:/swimmers";
+	}
+	@RequestMapping("/tags/{id}")
+	public String showTag(@PathVariable("id") Long id, Model model, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		User u =userService.findUser(loggedId);
+		model.addAttribute("loggedUser", u);
+		
+		TagCategory t=tagService.findTag(id);
+		model.addAttribute("tag", t);
+		return "showTag.jsp";
+	}
+	
+	//@RequestMapping("/swimmers/{id}/addTag")
+	//public String addTag(@RequestParam("tagName") String tagName, @PathVariable("id") Long id, HttpSession session) {
+	//	Long loggedId=(Long) session.getAttribute("loggedId");
+	//	if(loggedId==null) {
+	//		return "redirect:/logout";
+	//	}
+	//	User host =userService.findUser(loggedId);
+	//	
+	//	TagCategory t=new TagCategory();
+	//	
+	//	t.setTagName(tagName);
+	//	
+	//	Swimmer s=swimmerService.findSwimmer(id);
+	//	List<TagCategory> tags=s.getTagCategories();
+	//	t.setHost(host);
+	//	tags.add(t);
+	//	s.setTagCategories(tags);
+	//	swimmerService.updateSwimmer(s);
+	//	return "redirect:/swimmer/"+id;
+	//}
+	@RequestMapping("/swimmers/{id}/addTag")
+	public String addTag(@RequestParam("tagName") Long tagNameId, @PathVariable("id") Long id, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		User host =userService.findUser(loggedId);
+		
+		TagCategory t=tagService.findTag(tagNameId);
+		Swimmer s=swimmerService.findSwimmer(id);
+		
+		List<TagCategory> tagCategories=s.getTagCategories();
+		tagCategories.add(t);
+		s.setTagCategories(tagCategories);
+		swimmerService.updateSwimmer(s);
+		return "redirect:/swimmers/"+id;
+	}
+	@RequestMapping("/swimmers/{id}/removeTag")
+	public String removeTag(@PathVariable("id") Long id, @RequestParam("tagCategory") Long tagCategoryId, HttpSession session) {
+		Long loggedId=(Long) session.getAttribute("loggedId");
+		if(loggedId==null) {
+			return "redirect:/logout";
+		}
+		TagCategory t=tagService.findTag(tagCategoryId);
+		Swimmer s=swimmerService.findSwimmer(id);
+		
+		List<TagCategory> tagCategories=s.getTagCategories();
+		tagCategories.remove(t);
+		s.setTagCategories(tagCategories);
+		swimmerService.updateSwimmer(s);
+		return "redirect:/swimmers/"+id;
+	}
+	
 	@RequestMapping("/swimmers/{id}/addComment")
 	public String addCommentSw(@RequestParam("content") String content, @PathVariable("id") Long id, HttpSession session) {
 		Long loggedId=(Long) session.getAttribute("loggedId");
@@ -1096,4 +1205,5 @@ public class CompetitionController {
 		competitionService.updateCompetition(c);
 		return "redirect:/competitions";
 	}
+	
 }

@@ -30,9 +30,8 @@
 							<td>
 								<c:choose>
 									<c:when test="${loggedUser==swimmer.host}">
-										<a href="/swimmers/${swimmer.id}/delete">Delete</a> |
-										<a href="/swimmers/${swimmer.id}/edit">Edit</a>
-								
+										<a href="/swimmers/${swimmer.id}/edit" class="buttonE">Edit</a>
+										<a href="/swimmers/${swimmer.id}/delete" class="buttonD">Delete</a>	
 									</c:when>
 									<c:otherwise>
 										None

@@ -11,33 +11,23 @@
 	<div id="b_main">	
 		<section id="section_main">
 			<article class="nav_main">
-				<h2>All Albums</h2>
+				<h2>All Tags</h2>
 				<table>
 					<thead>
 						<tr>
-							<th>Album</th>
-							<th>Host</th>
+							<th>All Tags</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${albums}" var="album">
-						<tr>
-							
-							<td><a href="/albums/${album.id}"><c:out value="${album.title}"/></a></td>
-							<td><c:out value="${album.host.username}"/></td>
-							<td>
-								<c:choose>
-									<c:when test="${loggedUser==album.host}">
-										<a href="/albums/${album.id}/edit" class="buttonE">Edit</a>
-										<a href="/albums/${album.id}/delete" class="buttonD">Delete</a>
-									</c:when>
-									<c:otherwise>
-										None
-									</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
+						<c:forEach items="${tags}" var="tag">
+							<tr>
+								<td><a href="/tags/${tag.id}"><c:out value="${tag.tagName}"/></a></td>
+								<td>
+									
+									<a href="/tags/${tag.id}/delete">Delete</a>
+								</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -46,3 +36,4 @@
 	</div>
 </div>
 <%@ include file="footer.jsp" %>
+				
